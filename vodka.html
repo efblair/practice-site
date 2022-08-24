@@ -40,7 +40,7 @@
         
         }
         $(document).ready(function(){
-          $( ".carousel-control-next" ).click(function() {
+          $( "#next" ).click(function() {
             $(function(){
             $.ajax({
           url: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka",
@@ -57,7 +57,7 @@
       })
       i++;
       })
-      $( ".carousel-control-prev" ).click(function() {
+      $( "#prev" ).click(function() {
         console.log(i)
         $(function(){
 
@@ -134,19 +134,19 @@
       </header>
 
       <!-- Main Body -->
-      <section id="main" class="d-flex justify-content-center" >
+      <section id="main" class="d-flex justify-content-between">
+        <a id="prev" class="previous round d-flex flex-column align-self-center">&#8249;</a>
+
         <div id="cocktail"></div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
 
-
+        <a id="next" class="next round d-flex flex-column align-self-center">&#8250;</a>
 
     </section>
+
+    <div class="vertical-center">
+
+    </div>
+
 
 </body>
 </html>
