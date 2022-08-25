@@ -1,55 +1,56 @@
 html {
-    height: 100%;
-  }
-
-.nav-item:hover, .nav-item-active:hover {
-    border: solid;
+  height: 100%;
 }
 
-  #cocktail {
-    max-width: 350px;
-    text-align: center;
-    padding: 30px 30px 12px 30px;
-    color: #fff;
-    background-color: #eb5e28;
-    border: 4px solid #252422;
-    border-radius: 5px;
-    margin: 15px;
-  }
-  #cocktail h1 {
-    margin: 0 0 15px 0;
-    text-transform: uppercase;
-  }
-  #cocktail img {
-    max-width: 300px;
-    border: 6px solid #fff;
-    border-radius: 150px;
-  }
-  #cocktail ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  #cocktail li {
-    padding: 15px 0;
-    font-size: 18px;
-  }
-  #cocktail li:not(:last-of-type) {
-    border-bottom: 1px solid #fff;
-  }
+.nav-item:hover,
+.nav-item-active:hover {
+  border: solid;
+}
 
+/* Added min height so arrows don't move */
+#cocktail {
+  max-width: 350px;
+  text-align: center;
+  padding: 30px 30px 12px 30px;
+  color: #fff;
+  background-color: #eb5e28;
+  border: 4px solid #252422;
+  border-radius: 5px;
+  margin: 15px;
+  min-width: 350px;
+  min-height: 600px;
+}
+#cocktail h1 {
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+}
+#cocktail img {
+  max-width: 300px;
+  border: 6px solid #fff;
+  border-radius: 150px;
+}
+#cocktail ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#cocktail li {
+  padding: 15px 0;
+  font-size: 18px;
+}
+#cocktail li:not(:last-of-type) {
+  border-bottom: 1px solid #fff;
+}
 
-
-
-
-#prev, #next{
-
+#prev,
+#next {
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
 }
 
-#prev:hover, #next:hover {
+#prev:hover,
+#next:hover {
   background-color: #ddd;
   color: black;
 }
@@ -60,7 +61,7 @@ html {
 }
 
 .next {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
 }
 
