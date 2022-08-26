@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet" />
+    <title>Vodka</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script>
+     // moved everything inside document.ready function
+     $(document).ready(function () {
+      //moved variables to top for readability
+
+      let cocktails = [];
+      const heading = document.createElement("h1");
+      const cocktailImg = document.createElement("img")
+      const cocktailIngredients = document.createElement("ul");
+      let i = 0;
+      let ingre;
+      let ingred = localStorage.getItem("ingredient");
+      console.log(ingred);
+
+      (function() {
+        $.ajax({
+          url: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingred,
+          method: "GET",
+          dataType: "json",
+          success: function (data) {
+            getCocktail(data);
+// declare response globally to prevent need for multiple API calls
+            cocktails = data;
+          }
+        });
+      })();
+
+
+
+      function getCocktail(data) {
+        const cocktail = data.drinks[i];
+        const cocktailDiv = document.getElementById("cocktail")
+        const cocktailName = cocktail.strDrink;
+        heading.innerHTML = cocktailName;
+        cocktailDiv.appendChild(heading);
+
+        cocktailImg.src = cocktail.strDrinkThumb;
+        cocktailDiv.appendChild(cocktailImg);
+
+        cocktailDiv.appendChild(cocktailIngredients);
+
+      }
+
+//remove multiple api calls
+      $("#next").click(function () {
+        if (i == cocktails.drinks.length) {
+          i = 0;
+          // Added increment to else statement
+        } else {
+          i++;
+        }
+        getCocktail(cocktails);
+        
+      })
+
+// remove multiple API Calls
+      $("#prev").click(function () {
+        if (i == 0) {
+          i = cocktails.drinks.length - 1;
+        } else {
+          i--;
+        }
+        getCocktail(cocktails);
+      });
+
+      $("#vodka").click(function () {
+        console.log("clicked");
+        ingre = $("#vodka").attr('id');
+        localStorage.setItem("ingredient", ingre);
+        console.log(String(ingre));
+        location.reload();
+      })
+
+      $("#gin").click(function () {
+        console.log("clicked");
+        ingre = $("#gin").attr('id');
+        localStorage.setItem("ingredient", ingre);
+        console.log(String(ingre));
+        location.reload();
+      })
+
+      $("#rum").click(function () {
+        console.log("clicked");
+        ingre = $("#rum").attr('id');
+        localStorage.setItem("ingredient", ingre);
+        location.reload();
+      })
+
+      $("#Tequila").click(function () {
+        ingre = $("#Tequila").attr('id');
+        localStorage.setItem("ingredient", ingre);
+        location.reload();
+      })
+
+
+    })
+  </script>
+    </script>
+</head>
+<body style="background-color: #ccc5b9">
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white ">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cocktails</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Alcoholic Drinks
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="nav-link" id="vodka" value="vodka" href="#" aria-current="page" >Vodka</a>
+                    <a class="nav-link" id="gin" value="gin" href="#">Gin</a>
+                    <a class="nav-link" id="Tequila" href="#">Tequila</a>
+                      <a class="nav-link" id="rum" href="#">Rum</a>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+          </div>
+        </nav>
+        <!-- Navbar -->
+      
+        <!-- Hero image -->
+          <div class="mask" style="background-color: #403d39;">
+            <div class="d-flex justify-content-center align-items-center h-100">
+              <div class="text-white text-center">
+                <h1 class="mb-3">Cocktails</h1>
+                <h4 class="mb-3">Recipe Site</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+        <!-- Hero image -->
+      </header>
+
+      <!-- Main Body -->
+
+      <div id="text" class="d-flex justify-content-center">
+        <p id="intro" class="d-flex  align-items-center w-50 p-3">
+          This shows you all the cocktails that can be created using the requested ingredient, click the image to get more information
+        </p>
+      </div>
+
+      <section id="main" class="d-flex justify-content-between" style="max-height: 100vh;">
+        <a id="prev" class="previous round d-flex flex-column align-self-center">&#8249;</a>
+
+        <div id="cocktail"></div>
+
+        <a id="next" class="next round d-flex flex-column align-self-center">&#8250;</a>
+
+    </section>
+
+    <div class="vertical-center">
+
+    </div>
+
+
+</body>
+</html>
