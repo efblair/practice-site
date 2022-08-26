@@ -12,31 +12,36 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script>
-     // moved everything inside document.ready function
+
      $(document).ready(function () {
-      //moved variables to top for readability
+
 
       let cocktails = [];
       const heading = document.createElement("h1");
       const cocktailImg = document.createElement("img")
       const cocktailIngredients = document.createElement("ul");
       let i = 0;
-      let ingre;
-      let ingred = localStorage.getItem("ingredient");
-      console.log(ingred);
+// remove ingredient local variables
 
-      (function() {
+      // let ingre;
+      // let ingred = localStorage.getItem("ingredient");
+      // console.log(ingred);
+
+// Convert API call to a named function so we can invoke when necessary, add argument to it so we can pass the relevant ingredient in
+// = "vodka" sets a default value so that our cocktail loads if the user navigates directly to this page
+      function fetchCocktails(ingre = "vodka") {
         $.ajax({
-          url: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingred,
+          url: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingre,
           method: "GET",
           dataType: "json",
           success: function (data) {
             getCocktail(data);
-// declare response globally to prevent need for multiple API calls
             cocktails = data;
           }
         });
-      })();
+      }
+      // Immediately invoke our function
+      fetchCocktails();
 
 
 
@@ -87,9 +92,11 @@
       $("#gin").click(function () {
         console.log("clicked");
         ingre = $("#gin").attr('id');
-        localStorage.setItem("ingredient", ingre);
-        console.log(String(ingre));
-        location.reload();
+//Remove local storage code and instead pass our ingredient into the function
+        fetchCocktails(ingre);
+        // localStorage.setItem("ingredient", ingre);
+        // console.log(String(ingre));
+        // location.reload();
       })
 
       $("#rum").click(function () {
